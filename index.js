@@ -10,9 +10,9 @@ const app = new App({
 
 const fs = require("fs");
 function getRandomLine(filename){
-    var global_data = fs.readFileSync("articles.txt").toString();
-    var lines = global_data.split('\n');
-    var line = lines[Math.floor(Math.random()*lines.length)]
+    const global_data = fs.readFileSync("articles.txt").toString();
+    const lines = global_data.split('\n');
+    const line = lines[Math.floor(Math.random()*lines.length)]
     return line;
 }
 
@@ -36,9 +36,25 @@ app.command("/cn-help", async({ ack, respond })=> {
 
 app.command("/article", async({ack, respond}) => {
     await ack();
-    var articleLink = getRandomLine('articles.txt');
+    const articleLink = getRandomLine('articles.txt');
     console.log(articleLink);
     await respond({text: articleLink});
+});
+
+app.command("/submit-article", async({body, ack, respond, }) =>{
+    await ack();
+    console.log('Submitted new entry');
+    if (body.text.includes("https"))
+    {
+       fs.appendFile('articles.txt', `\n${body.text}`, function (err) {
+        if (err) throw err;
+        console.log('Saved a new article!');
+    })
+    await respond("Your article has been added to the list. Thanks :colon3:"); 
+    } else {
+        await respond("You did not submit a proper link! :angrycat:");
+    }
+    
 });
 
 (async() => {
