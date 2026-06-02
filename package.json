@@ -13,5 +13,13 @@
   "dependencies": {
     "@slack/bolt": "^4.7.3",
     "dotenv": "^17.4.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://AloneAlexandros@github.com/thealonealex/contentbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thealonealex/contentbot/issues"
+  },
+  "homepage": "https://github.com/thealonealex/contentbot#readme"
 }

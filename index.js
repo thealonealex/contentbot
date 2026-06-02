@@ -8,6 +8,15 @@ const app = new App({
     socketMode: true
 });
 
+const fs = require("fs");
+function getRandomLine(filename){
+    var global_data = fs.readFileSync("articles.txt").toString();
+    var lines = global_data.split('\n');
+    var line = lines[Math.floor(Math.random()*lines.length)]
+    return line;
+}
+
+
 app.command("/cn-ping", async({ command, ack, respond }) => {
     const start = Date.now();
     await ack();
@@ -20,8 +29,16 @@ app.command("/cn-help", async({ ack, respond })=> {
     await respond({
         text:
 `Available Commands:
-    /cn-ping - Check bot latency`
+    /cn-ping - Check bot latency
+    /article - Fetch a random saved article`
     })
+});
+
+app.command("/article", async({ack, respond}) => {
+    await ack();
+    var articleLink = getRandomLine('articles.txt');
+    console.log(articleLink);
+    await respond({text: articleLink});
 });
 
 (async() => {
