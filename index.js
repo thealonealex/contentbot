@@ -10,7 +10,7 @@ const app = new App({
 
 const fs = require("fs");
 function getRandomLine(filename){
-    const global_data = fs.readFileSync("articles.txt").toString();
+    const global_data = fs.readFileSync(filename).toString();
     const lines = global_data.split('\n');
     const line = lines[Math.floor(Math.random()*lines.length)]
     return line;
@@ -43,7 +43,6 @@ app.command("/article", async({ack, respond}) => {
 
 app.command("/submit-article", async({body, ack, respond, }) =>{
     await ack();
-    console.log('Submitted new entry');
     if (body.text.includes("https"))
     {
        fs.appendFile('articles.txt', `\n${body.text}`, function (err) {
@@ -51,6 +50,28 @@ app.command("/submit-article", async({body, ack, respond, }) =>{
         console.log('Saved a new article!');
     })
     await respond("Your article has been added to the list. Thanks :colon3:"); 
+    } else {
+        await respond("You did not submit a proper link! :angrycat:");
+    }
+    
+});
+
+app.command("/video", async({ack, respond}) => {
+    await ack();
+    const articleLink = getRandomLine('videos.txt');
+    console.log(articleLink);
+    await respond({text: articleLink});
+});
+
+app.command("/submit-video", async({body, ack, respond, }) =>{
+    await ack();
+    if (body.text.includes("https"))
+    {
+       fs.appendFile('videos.txt', `\n${body.text}`, function (err) {
+        if (err) throw err;
+        console.log('Saved a new video!');
+    })
+    await respond("Your video has been added to the list. Thanks :colon3:"); 
     } else {
         await respond("You did not submit a proper link! :angrycat:");
     }

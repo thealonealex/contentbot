@@ -1,3 +1,4 @@
 node_modules
 .env
 /articles.txt
+/videos.txt
