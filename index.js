@@ -30,8 +30,9 @@ app.command("/cn-help", async({ ack, respond })=> {
         text:
 `Available Commands:
     /cn-ping - Check bot latency
+    /cn-help - Lists all Connie commands
     /article - Fetch a random saved article
-    /video - Fetch a random save video
+    /video - Fetch a random saved video
     /submit-article - Submit an article (must be of the type https://li.nk)
     /submit-video - Submit a video (must be of the type https://vi.deo)`
     })
