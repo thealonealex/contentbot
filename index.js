@@ -30,7 +30,10 @@ app.command("/cn-help", async({ ack, respond })=> {
         text:
 `Available Commands:
     /cn-ping - Check bot latency
-    /article - Fetch a random saved article`
+    /article - Fetch a random saved article
+    /video - Fetch a random save video
+    /submit-article - Submit an article (must be of the type https://li.nk)
+    /submit-video - Submit a video (must be of the type https://vi.deo)`
     })
 });
 
