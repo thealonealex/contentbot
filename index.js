@@ -9,6 +9,7 @@ const app = new App({
 });
 
 const fs = require("fs");
+const { isArgumentsObject } = require("util/types");
 function getRandomLine(filename){
     const global_data = fs.readFileSync(filename).toString();
     const lines = global_data.split('\n');
@@ -40,9 +41,13 @@ app.command("/cn-help", async({ ack, respond })=> {
 
 app.command("/article", async({ack, respond}) => {
     await ack();
-    const articleLink = getRandomLine('articles.txt');
-    console.log(articleLink);
+    let articleLink = getRandomLine('articles.txt');
+    while(articleLink == ""){
+        articleLink = getRandomLine('articles.txt');
+        console.log("Empty link, retrying...");
+    }
     await respond({text: articleLink});
+    console.log("Posted an article link");
 });
 
 app.command("/submit-article", async({body, ack, respond, }) =>{
@@ -62,9 +67,13 @@ app.command("/submit-article", async({body, ack, respond, }) =>{
 
 app.command("/video", async({ack, respond}) => {
     await ack();
-    const articleLink = getRandomLine('videos.txt');
-    console.log(articleLink);
-    await respond({text: articleLink});
+    let videoLink = getRandomLine('videos.txt');
+    while(videoLink == ""){
+        videoLink = getRandomLine('videos.txt');
+        console.log("Empty link, retrying...");
+    }
+    await respond({text: videoLink});
+    console.log("Posted a video link");
 });
 
 app.command("/submit-video", async({body, ack, respond, }) =>{
