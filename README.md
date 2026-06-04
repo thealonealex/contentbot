@@ -1,5 +1,6 @@
 # Connie the contentbot
 A Slack bot that picks random articles and videos from a list of submitted links by the users.
+
 ![connie replying to the command /article with an article link](<screenshot.png>)
 ## How does this work
 Connie saves submitted links in a txt links, and fetches a random line for the file when a user requests
